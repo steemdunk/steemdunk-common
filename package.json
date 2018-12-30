@@ -1,0 +1,47 @@
+{
+  "name": "steemdunk-common",
+  "version": "0.0.1",
+  "description": "Steem Dunk common library",
+  "main": "lib/index.js",
+  "author": "Samuel Grenier",
+  "license": "MIT",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "gulp build",
+    "test": "cross-env NODE_ENV=TEST npx mocha -r ts-node/register test/index.ts"
+  },
+  "files": [
+    "tsconfig.json",
+    "gulpfile.js",
+    "src",
+    "lib"
+  ],
+  "browser": {
+    "./lib/index.js": "./lib/index-browser.js"
+  },
+  "types": "./lib/index.d.ts",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "debug": "^4.1.0",
+    "loglevel": "^1.6.1",
+    "superagent": "^4.0.0-beta.5"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/debug": "0.0.31",
+    "@types/loglevel": "^1.5.3",
+    "@types/mocha": "^5.2.2",
+    "@types/node": "^10.12.1",
+    "chai": "^4.1.2",
+    "cross-env": "^5.2.0",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-typescript": "^5.0.0-alpha.2",
+    "merge2": "^1.2.1",
+    "mocha": "^5.2.0",
+    "ts-node": "^7.0.0",
+    "tslint": "^5.10.0",
+    "typescript": "^3.1.4"
+  }
+}
