@@ -13,10 +13,6 @@ setConfig({
   https_server: undefined as any
 });
 
-describe('Database', () => {
-  require('./db');
-});
-
 describe('Lock', () => {
   require('./lock');
 });
