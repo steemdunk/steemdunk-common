@@ -12,9 +12,9 @@ const outDir = path.join(__dirname, 'lib');
 
 gulp.task('build', () => {
   const res = gulp.src(src)
-                    .pipe(sourceMaps.init())
-                    .pipe(proj())
-                    .on('error', () => {});
+                  .pipe(sourceMaps.init())
+                  .pipe(proj())
+                  .on('error', () => {});
 
   const js = res.js.pipe(sourceMaps.write('.', {
     includeContent: false,
@@ -24,9 +24,11 @@ gulp.task('build', () => {
   return merge(js, dts);
 });
 
-gulp.task('watch', gulp.series(['build']), () => {
+gulp.task('watch:src', () => {
   return gulp.watch(src, gulp.series(['build']));
 });
+
+gulp.task('watch', gulp.series(['build', 'watch:src']));
 
 gulp.task('clean', () => {
   return del(`${outDir}/**`);
