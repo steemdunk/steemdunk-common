@@ -7,13 +7,6 @@ export interface NetOptions {
   node: string;
 }
 
-export interface HttpsServerConfig {
-  host: string;
-  port: number;
-  ssl_cert_path: string;
-  ssl_key_path: string;
-}
-
 export interface SteemConnect {
   host: string;
   redirect_uri: string;
@@ -31,7 +24,6 @@ export interface Config {
   steem_net: NetOptions;
   steem_settings: SteemSettings;
   steem_connect: SteemConnect;
-  https_server: HttpsServerConfig;
 }
 
 export const Config: Config = {} as any;
@@ -43,7 +35,6 @@ if (process.env.NODE_ENV !== 'TEST') {
   Config.steem_net = raw.steem_net;
   Config.steem_settings = raw.steem_settings;
   Config.steem_connect = raw.steem_connect;
-  Config.https_server = raw.server.https;
 }
 
 export function setConfig(conf: Config) {
