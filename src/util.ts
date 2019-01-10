@@ -1,9 +1,3 @@
-import {
-  CurationQuota,
-  PlanPrice,
-  Payment,
-  Plan
-} from './payment';
 import * as crypto from 'crypto';
 
 export class StringUtil {
