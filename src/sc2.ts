@@ -1,7 +1,8 @@
 import * as request from 'superagent';
+import { getEnvVar } from './util';
 import { Config } from './config';
 
-const BASE_API = process.env.NODE_ENV !== 'TEST'
+const BASE_API = getEnvVar('NODE_ENV') !== 'TEST'
                   ? `${Config.steem_connect.host}/api` : '';
 
 export class SC2Error extends Error {

@@ -29,3 +29,16 @@ export class StringUtil {
     return ascii;
   }
 }
+
+function getProcess() {
+  return process;
+}
+
+/**
+ * Retrieves a live environment variable that is not provided at build time.
+ *
+ * @param v Environment variable
+ */
+export function getEnvVar(v: string): string|undefined {
+  return getProcess().env[v];
+}

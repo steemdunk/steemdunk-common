@@ -1,3 +1,4 @@
+import { getEnvVar } from './util';
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
 
@@ -27,8 +28,8 @@ export interface Config {
 }
 
 export const Config: Config = {} as any;
-if (process.env.NODE_ENV !== 'TEST') {
-  const file = process.env.SD_CONFIG || 'config.yml';
+if (getEnvVar('NODE_ENV') !== 'TEST') {
+  const file = getEnvVar('SD_CONFIG') || 'config.yml';
   const data = fs.readFileSync(file).toString('utf8');
   const raw = yaml.safeLoad(data);
 
