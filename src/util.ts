@@ -30,15 +30,12 @@ export class StringUtil {
   }
 }
 
-function getProcess() {
-  return process;
-}
-
 /**
  * Retrieves a live environment variable that is not provided at build time.
  *
  * @param v Environment variable
  */
-export function getEnvVar(v: string): string|undefined {
-  return getProcess().env[v];
+export function getEnvVar(name: string, fallback?: string): string|undefined {
+  if (process.env.hasOwnProperty(name)) return process.env[name];
+  return fallback;
 }
