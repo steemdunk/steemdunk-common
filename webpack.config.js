@@ -23,7 +23,7 @@ module.exports = (_, argv) => {
 
   const node = merge(common, {
     target: 'node',
-    entry: './src/index.ts',
+    entry: path.join(__dirname, 'src/index.ts'),
     output: {
       path: path.resolve(__dirname, 'lib'),
       filename: 'index.js',
@@ -32,7 +32,7 @@ module.exports = (_, argv) => {
   });
 
   const browser = merge(common, {
-    entry: './src/index-browser.ts',
+    entry: path.join(__dirname, 'src/index-browser.ts'),
     output: {
       path: path.resolve(__dirname, 'lib'),
       filename: 'index-browser.js',
