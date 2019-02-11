@@ -1,9 +1,5 @@
 import * as request from 'superagent';
 import { getConfig } from './config';
-import { getEnvVar } from './util';
-
-const BASE_API = getEnvVar('NODE_ENV') !== 'TEST'
-                  ? `${getConfig().steem_connect.host}/api` : '';
 
 export class SC2Error extends Error {
 
@@ -23,8 +19,16 @@ export interface AuthResponse {
 }
 
 export class SC2 {
+  private static _BASE_API: string|undefined;
+  static get BASE_API(): string {
+    if (SC2._BASE_API === undefined) {
+      SC2._BASE_API = `${getConfig().steem_connect.host}/api`;
+    }
+    return SC2._BASE_API;
+  }
+
   static async send(endpoint: string, token?: string) {
-    const req = request.post(BASE_API + endpoint);
+    const req = request.post(SC2.BASE_API + endpoint);
     if (token) req.set('Authorization', token);
 
     const res = await req;
