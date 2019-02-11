@@ -27,17 +27,18 @@ export interface Config {
   steem_connect: SteemConnect;
 }
 
-export const Config: Config = {} as any;
-if (getEnvVar('NODE_ENV') !== 'TEST') {
-  const file = getEnvVar('SD_CONFIG') || 'config.yml';
-  const data = fs.readFileSync(file).toString('utf8');
-  const raw = yaml.safeLoad(data);
+let config: Config|undefined;
+export function getConfig(): Config {
+  if (config === undefined) {
+    const file = getEnvVar('SD_CONFIG') || 'config.yml';
+    const data = fs.readFileSync(file).toString('utf8');
+    const raw = yaml.safeLoad(data);
 
-  Config.steem_net = raw.steem_net;
-  Config.steem_settings = raw.steem_settings;
-  Config.steem_connect = raw.steem_connect;
-}
-
-export function setConfig(conf: Config) {
-  Object.assign(Config, conf);
+    config = {
+      steem_net: raw.steem_net,
+      steem_settings: raw.steem_settings,
+      steem_connect: raw.steem_connect
+    };
+  }
+  return config;
 }

@@ -1,9 +1,9 @@
 import * as request from 'superagent';
+import { getConfig } from './config';
 import { getEnvVar } from './util';
-import { Config } from './config';
 
 const BASE_API = getEnvVar('NODE_ENV') !== 'TEST'
-                  ? `${Config.steem_connect.host}/api` : '';
+                  ? `${getConfig().steem_connect.host}/api` : '';
 
 export class SC2Error extends Error {
 
@@ -35,7 +35,7 @@ export class SC2 {
   }
 
   static async getToken(code: string): Promise<AuthResponse|undefined> {
-    const secret = Config.steem_connect.client_secret;
+    const secret = getConfig().steem_connect.client_secret;
     const auth = `/oauth2/token?code=${code}&client_secret=${secret}`;
     const data = await SC2.send(auth);
     if (!(data.username && data.access_token && data.expires_in)) {
