@@ -9,7 +9,7 @@ export class SC2Error extends Error {
 
   readonly response: request.Response;
 
-  constructor(res: request.Response, msg?: string) {
+  constructor(res: request.Response) {
     super('SC2 send error: ' + res.status);
     this.response = res;
   }
